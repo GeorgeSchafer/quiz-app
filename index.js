@@ -1,17 +1,75 @@
 
 'use strict';
 
-function welcomePage(){
+const STORE = [{
+        question: '"Ovomorph" is the name of which stage of Xenomorph biology?',
+        answers: [
+            'chest-burster',
+            'facehugger',
+            'pupa',
+            'egg'
+        ],
+        correctAnswerIndex: 3
+    },
+    {
+        question: 'Cutting a xenomorph at any phase of life is unsafe because of what property of its blood?',
+        answers: [
+            'sweet and sour',
+            'acidity',
+            'noxiousness',
+            'asthma-inducing'
+        ],
+        correctAnswerIndex: 1
+    },
+    {
+        question: 'Xenomorph ova attract intelligent creatures by openning its four lobes when a potential host--?',
+        answers: [
+            'comes close.',
+            'is attracted by the sweet smell.',
+            'picks up and shakes the ova.',
+            'licks the ova.'
+        ],
+        correctAnswerIndex: 0
+    },
+    {
+        question: 'Should you become infected by a Xenomorph egg, other Weyland-Yutani staff will not be able to remove it because--?',
+        answers: [
+            'it would contravene safety protocols',
+            'management will not allow it',
+            'Xenomorph infection is incurable.',
+            'All of the above'
+        ],
+        correctAnswerIndex: 3
+    },
+    {
+        question: 'When handling the eggs and facehuggers, I acknowledge that my and my coworkers safety is the responsibility of --.',
+        answers: [
+            'Weyland-Yutani Corporation',
+            'my supervisor',
+            'the entire team',
+            'myself'
+        ],
+        correctAnswerIndex: 2
+    },
+
+];
+
+
+function welcomePage() {
     /** The starting screen should have a button that users can click to start the quiz. */
 
     /** 
      * This function will welcome the user to the quiz and invite the user to continue.
      */
 
+
+    $('.head').html('<h1>Welcome!</h1>');
+    $('.body').text('Placeholder text');
+
     console.log(`welcomePage() ran`);
 }
 
-function questionLoop(){
+function questionLoop() {
     /** Users should be prompted through a series of at least 5 multiple choice questions that they can answer.
             Users should be asked questions 1 after the other.
             Users should only be prompted with 1 question at a time.
@@ -27,10 +85,21 @@ function questionLoop(){
      * it will also keep score
      */
 
+
+    $('.head').html(`<h2>${STORE[i].question}</h2>`);
+    $('.body').html(`<ul class='answerBucket'></ul>`);
+
+    for(let i = 0 ; i < STORE.length ; i++){
+        for(let j = 0 ; j < STORE[i].answers.length ; j++){
+
+        }
+    }
+
+
     console.log(`questionLoop() ran`);
 }
 
-function finalScore(){
+function finalScore() {
     /** Users should be shown their overall score at the end of the quiz. In other words, how many questions they got right out of the total questions asked.
         Users should be able to start a new quiz.*/
 
@@ -39,8 +108,8 @@ function finalScore(){
      * 
      */
 
-     console.log(`finalScore() ran`)
-;}
+    console.log(`finalScore() ran`);
+}
 
 
 
@@ -51,10 +120,12 @@ function finalScore(){
 
 
 
-function init(){
+function init() {
     welcomePage();
     questionLoop();
     finalScore();
 }
 
-$(init);
+$(document).ready(function () {
+    init();
+});
