@@ -14,7 +14,7 @@ const STORE = [{
     {
         question: 'Cutting a xenomorph at any phase of life is unsafe because of what property of its blood?',
         answers: [
-            'sweet and sour',
+            'emo-ness',
             'acidity',
             'noxiousness',
             'asthma-inducing'
@@ -24,10 +24,10 @@ const STORE = [{
     {
         question: 'Xenomorph ova attract intelligent creatures by openning its four lobes when a potential host--?',
         answers: [
-            'comes close.',
-            'is attracted by the sweet smell.',
-            'picks up and shakes the ova.',
-            'licks the ova.'
+            'comes close',
+            'is attracted by the sweet smell',
+            'picks up and shakes the ova',
+            'licks the ova'
         ],
         correctAnswerIndex: 0
     },
@@ -42,7 +42,7 @@ const STORE = [{
         correctAnswerIndex: 3
     },
     {
-        question: 'When handling the eggs and facehuggers, I acknowledge that my and my coworkers safety is the responsibility of --.',
+        question: 'When handling the eggs and facehuggers, I acknowledge that my and my coworkers safety is the responsibility of --?',
         answers: [
             'Weyland-Yutani Corporation',
             'my supervisor',
@@ -55,6 +55,13 @@ const STORE = [{
 ];
 
 
+/**
+ * QuestionCounter remembers which question the user is on.
+ * Score remembers how many questions the user got right.
+ */
+let questionCounter = 0;
+let score = 0;
+
 function welcomePage() {
     /** The starting screen should have a button that users can click to start the quiz. */
 
@@ -65,8 +72,12 @@ function welcomePage() {
 
     $('.head').html('<h1>Welcome!</h1>');
     $('.body').text('Placeholder text');
+    $('.body').append(`<div class='start'>Click here to start</div>`);
+    $('.body').on('click', '.start', questionLoop() );
 
     console.log(`welcomePage() ran`);
+
+
 }
 
 function questionLoop() {
@@ -85,15 +96,18 @@ function questionLoop() {
      * it will also keep score
      */
 
-
-    $('.head').html(`<h2>${STORE[i].question}</h2>`);
+    $(`.head`).empty();
     $('.body').html(`<ul class='answerBucket'></ul>`);
 
-    for(let i = 0 ; i < STORE.length ; i++){
-        for(let j = 0 ; j < STORE[i].answers.length ; j++){
 
-        }
+    $('.answerBucket').empty();
+    $('.head').html(`<h2>${STORE[questionCounter].question}</h2>`);
+    for(let j = 0 ; j < STORE[questionCounter].answers.length ; j++){
+        $(`.answerBucket`).append(`<li>${STORE[questionCounter].answers[j]}</li>`); 
     }
+    
+    questionCounter++;
+    
 
 
     console.log(`questionLoop() ran`);
@@ -122,10 +136,6 @@ function finalScore() {
 
 function init() {
     welcomePage();
-    questionLoop();
-    finalScore();
 }
 
-$(document).ready(function () {
-    init();
-});
+$(init);
