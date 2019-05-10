@@ -1,6 +1,13 @@
 
 'use strict';
 
+/**
+ * QuestionCounter remembers which question the user is on.
+ * Score remembers how many questions the user got right.
+ */
+let questionCounter = 0;
+let score = 0;
+
 const STORE = [{
         question: '"Ovomorph" is the name of which stage of Xenomorph biology?',
         answers: [
@@ -42,6 +49,16 @@ const STORE = [{
         correctAnswerIndex: 3
     },
     {
+        question: 'Due to the nature of Xenomorph blood, what special device is needed to collect blood samples?',
+        answers: [
+            'a shotgun',
+            'a glass needle',
+            'any old knife',
+            'none of the above'
+        ],
+        correctAnswerIndex: 1
+    },
+    {
         question: 'When handling the eggs and facehuggers, I acknowledge that my and my coworkers safety is the responsibility of --?',
         answers: [
             'Weyland-Yutani Corporation',
@@ -51,16 +68,50 @@ const STORE = [{
         ],
         correctAnswerIndex: 2
     },
+    {
+        question: '',
+        answers: [
+            '',
+            '',
+            '',
+            ''
+        ],
+        correctAnswerIndex: 0
+    },
+    {
+        question: '',
+        answers: [
+            '',
+            '',
+            '',
+            ''
+        ],
+        correctAnswerIndex: 0
+    },
+    {
+        question: '',
+        answers: [
+            '',
+            '',
+            '',
+            ''
+        ],
+        correctAnswerIndex: 0
+    },
+    {
+        question: '',
+        answers: [
+            '',
+            '',
+            '',
+            ''
+        ],
+        correctAnswerIndex: 0
+    }
 
 ];
 
 
-/**
- * QuestionCounter remembers which question the user is on.
- * Score remembers how many questions the user got right.
- */
-let questionCounter = 0;
-let score = 0;
 
 function welcomePage() {
     /** The starting screen should have a button that users can click to start the quiz. */
@@ -70,10 +121,10 @@ function welcomePage() {
      */
 
 
-    $('.head').html('<h1>Welcome!</h1>');
-    $('.body').text('Placeholder text');
-    $('.body').append(`<div class='start'>Click here to start</div>`);
-    $('.body').on('click', '.start', questionLoop() );
+    $('.head').html(`<h1>Xenomorph Safety Quiz</h1>`);
+    $('.body').append(`<section>After this training quiz you will be rated a class-C hazardous biological handler by Weyland-Yutani, heretofore known as ‘the Company’. By undertaking this quiz you waive the right to take legal action against the Company for any physical or mental harm resulting from the shipping and handling of alien eggs. Failure to comply will result in a detailed paperwork debriefing of family-members. </section>`);
+    $('.foot').append(`<button class='start' type='button'>Click here to start</button>`);
+//    $('.start').click( questionLoop() );
 
     console.log(`welcomePage() ran`);
 
