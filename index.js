@@ -59,7 +59,7 @@ const STORE = [{
         correctAnswerIndex: 1
     },
     {
-        question: 'When handling the eggs and facehuggers, I acknowledge that my and my coworkers safety is the responsibility of --?',
+        question: 'When handling the eggs and other specimens, I acknowledge that my and my coworkers safety is the responsibility of --?',
         answers: [
             'Weyland-Yutani Corporation',
             'my supervisor',
@@ -122,9 +122,9 @@ function welcomePage() {
 
 
     $('.head').html(`<h1>Xenomorph Safety Quiz</h1>`);
-    $('.body').append(`<section>After this training quiz you will be rated a class-C hazardous biological handler by Weyland-Yutani, heretofore known as ‘the Company’. By undertaking this quiz you waive the right to take legal action against the Company for any physical or mental harm resulting from the shipping and handling of alien eggs. Failure to comply will result in a detailed paperwork debriefing of family-members. </section>`);
+    $('.body').append(`<p>After this training quiz you will be rated a class-C hazardous biological handler by Weyland-Yutani, heretofore known as ‘the Company’. By undertaking this quiz you waive the right to take legal action against the Company for any physical or mental harm resulting from the shipping and handling of alien eggs. Failure to comply will result in a detailed paperwork debriefing of family-members. </p>`);
     $('.foot').append(`<button class='start' type='button'>Click here to start</button>`);
-//    $('.start').click( questionLoop() );
+    $('.start').on('click', () => {questionLoop()} );
 
     console.log(`welcomePage() ran`);
 
@@ -148,20 +148,39 @@ function questionLoop() {
      */
 
     $(`.head`).empty();
-    $('.body').html(`<ul class='answerBucket'></ul>`);
+    $(`.foot`).empty();
+    $('.body').html(`<form class='answerBucket'></form>`);
 
 
     $('.answerBucket').empty();
     $('.head').html(`<h2>${STORE[questionCounter].question}</h2>`);
     for(let j = 0 ; j < STORE[questionCounter].answers.length ; j++){
-        $(`.answerBucket`).append(`<li>${STORE[questionCounter].answers[j]}</li>`); 
+        $(`.answerBucket`).append(`<p><button type='button${j}'>${STORE[questionCounter].answers[j]}</button></p>`); 
     }
     
-    questionCounter++;
+    $('button0').on('click', ()=>{ evaluateAnswer(0) });
+    $('button1').on('click', ()=>{ evaluateAnswer(1) });
+    $('button2').on('click', ()=>{ evaluateAnswer(2) });
+    $('button3').on('click', ()=>{ evaluateAnswer(3) });
+
+
+
+
     
-
-
     console.log(`questionLoop() ran`);
+}
+
+function evaluateAnswer( int ){
+    if (int === STORE[questionCounter].correctAnswerIndex){
+        score++;
+        console.log(`correct();`);
+    } else {
+        console.log(`incorrect();`);
+    }
+
+    questionCounter++;
+
+    
 }
 
 function finalScore() {
