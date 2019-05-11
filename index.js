@@ -155,15 +155,13 @@ function questionLoop() {
     $('.answerBucket').empty();
     $('.head').html(`<h2>${STORE[questionCounter].question}</h2>`);
     for(let j = 0 ; j < STORE[questionCounter].answers.length ; j++){
-        $(`.answerBucket`).append(`<p><button type='button${j}'>${STORE[questionCounter].answers[j]}</button></p>`); 
+        $(`.answerBucket`).append(`<p><button type='button' class='button${j}'>${STORE[questionCounter].answers[j]}</button></p>`); 
     }
     
-    $('.answerBucket').on('click', '.button0', ()=>{ evaluateAnswer(0) });
-    $('.answerBucket').on('click', '.button1', ()=>{ evaluateAnswer(1) });
-    $('.answerBucket').on('click', '.button2', ()=>{ evaluateAnswer(2) });
-    $('.answerBucket').on('click', '.button3', ()=>{ evaluateAnswer(3) });
-
-
+    $('.body').on('click', '.button0', ()=>{ evaluateAnswer(0) });
+    $('.body').on('click', '.button1', ()=>{ evaluateAnswer(1) });
+    $('.body').on('click', '.button2', ()=>{ evaluateAnswer(2) });
+    $('.body').on('click', '.button3', ()=>{ evaluateAnswer(3) });
 
 
     
@@ -173,14 +171,20 @@ function questionLoop() {
 function evaluateAnswer( int ){
     if (int === STORE[questionCounter].correctAnswerIndex){
         score++;
-        console.log(`correct();`);
+        correct();
     } else {
         console.log(`incorrect();`);
     }
 
     questionCounter++;
 
-    
+}
+
+function correct(){
+    $('.splash').toggleClass('hidden');
+ //   $('.splash').append(`<img class='correct' src='./images/nodding.gif' alt='Xenomorph appears to be nodding' />`);
+    $('.splash').append(`<button type='button' class='continue'>Continue</button>`);
+    alert('correct');
 }
 
 function finalScore() {
