@@ -158,10 +158,10 @@ function questionLoop() {
         $(`.answerBucket`).append(`<p><button type='button${j}'>${STORE[questionCounter].answers[j]}</button></p>`); 
     }
     
-    $('button0').on('click', ()=>{ evaluateAnswer(0) });
-    $('button1').on('click', ()=>{ evaluateAnswer(1) });
-    $('button2').on('click', ()=>{ evaluateAnswer(2) });
-    $('button3').on('click', ()=>{ evaluateAnswer(3) });
+    $('.answerBucket').on('click', 'button0', ()=>{ evaluateAnswer(0) });
+    $('.answerBucket').on('click', 'button1', ()=>{ evaluateAnswer(1) });
+    $('.answerBucket').on('click', 'button2', ()=>{ evaluateAnswer(2) });
+    $('.answerBucket').on('click', 'button3', ()=>{ evaluateAnswer(3) });
 
 
 
