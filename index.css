@@ -7,17 +7,16 @@ body {
     color:white;
 }
 
-.splash {
+.correct,.incorrect {
     position: absolute;
-
 }
 
 .hidden {
     display:none;
 }
 
-.correct{
-    width:100%;
+.correct,.incorrect{
+    width:400px;
 }
 
 

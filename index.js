@@ -67,46 +67,6 @@ const STORE = [{
             'myself'
         ],
         correctAnswerIndex: 2
-    },
-    {
-        question: '',
-        answers: [
-            '',
-            '',
-            '',
-            ''
-        ],
-        correctAnswerIndex: 0
-    },
-    {
-        question: '',
-        answers: [
-            '',
-            '',
-            '',
-            ''
-        ],
-        correctAnswerIndex: 0
-    },
-    {
-        question: '',
-        answers: [
-            '',
-            '',
-            '',
-            ''
-        ],
-        correctAnswerIndex: 0
-    },
-    {
-        question: '',
-        answers: [
-            '',
-            '',
-            '',
-            ''
-        ],
-        correctAnswerIndex: 0
     }
 
 ];
@@ -124,6 +84,8 @@ function welcomePage() {
     $('.head').html(`<h1>Xenomorph Safety Quiz</h1>`);
     $('.body').append(`<p>After this training quiz you will be rated a class-C hazardous biological handler by Weyland-Yutani, heretofore known as ‘the Company’. By undertaking this quiz you waive the right to take legal action against the Company for any physical or mental harm resulting from the shipping and handling of alien eggs. Failure to comply will result in a detailed paperwork debriefing of family-members. </p>`);
     $('.foot').append(`<button class='start' type='button'>Click here to start</button>`);
+    $('.correct').append(`<img src='./images/nodding.gif' alt='Xenomorph appears to be nodding' /><button type='button' class='continue'>Continue</button>`);
+    $('.incorrect').append(`<img src='./images/facehugging.gif' alt='Face hugger infecting in first person.' /><button type='button' class='continue'>Continue</button>`);
     $('.start').on('click', () => {questionLoop()} );
 
     console.log(`welcomePage() ran`);
@@ -151,7 +113,6 @@ function questionLoop() {
     $(`.foot`).empty();
     $('.body').html(`<form class='answerBucket'></form>`);
 
-
     $('.answerBucket').empty();
     $('.head').html(`<h2>${STORE[questionCounter].question}</h2>`);
     for(let j = 0 ; j < STORE[questionCounter].answers.length ; j++){
@@ -169,22 +130,31 @@ function questionLoop() {
 }
 
 function evaluateAnswer( int ){
+    $('.body').empty();
+    $('.splash').toggleClass('hidden');
     if (int === STORE[questionCounter].correctAnswerIndex){
         score++;
-        correct();
+        $('.correct').toggleClass('hidden');
     } else {
-        console.log(`incorrect();`);
+        $('.incorrect').toggleClass('hidden');
     }
 
     questionCounter++;
+    alert
+
+    $('.correct').on('click','.continue',()=>{  
+        $('.correct').toggleClass('hidden');
+        questionLoop(); })
+
+    $('.incorrect').on('click','.continue',()=>{  
+        $('.incorrect').toggleClass('hidden');
+        questionLoop(); })
+
+        
 
 }
 
-function correct(){
-    $('.splash').toggleClass('hidden');
- //   $('.splash').append(`<img class='correct' src='./images/nodding.gif' alt='Xenomorph appears to be nodding' />`);
-    $('.splash').append(`<button type='button' class='continue'>Continue</button>`);
-    alert('correct');
+function incorrect(){
 }
 
 function finalScore() {
