@@ -140,7 +140,7 @@ function evaluateAnswer( int ){
     }
 
     questionCounter++;
-    alert
+    console.log("Question Counter is set to:" + questionCounter);
 
     $('.correct').on('click','.continue',()=>{  
         $('.correct').toggleClass('hidden');
