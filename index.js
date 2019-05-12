@@ -112,24 +112,29 @@ function questionLoop() {
     $(`.head`).empty();
     $(`.foot`).empty();
     $('.body').html(`<form class='answerBucket'></form>`);
-
     $('.answerBucket').empty();
-    $('.head').html(`<h2>${STORE[questionCounter].question}</h2>`);
-    for(let j = 0 ; j < STORE[questionCounter].answers.length ; j++){
-        $(`.answerBucket`).append(`<p><button type='button' class='button${j}'>${STORE[questionCounter].answers[j]}</button></p>`); 
-    }
-    
-    $('.body').on('click', '.button0', ()=>{ evaluateAnswer(0) });
-    $('.body').on('click', '.button1', ()=>{ evaluateAnswer(1) });
-    $('.body').on('click', '.button2', ()=>{ evaluateAnswer(2) });
-    $('.body').on('click', '.button3', ()=>{ evaluateAnswer(3) });
 
+
+    if (questionCounter <= STORE.length){
+        $('.head').html(`<h2>${STORE[questionCounter].question}</h2>`);
+        for(let j = 0 ; j < STORE[questionCounter].answers.length ; j++){
+            $(`.answerBucket`).append(`<p><button type='button' class='button${j}'>${STORE[questionCounter].answers[j]}</button></p>`); 
+        }
+        
+        $('.button0').on('click',  ()=>{ evaluateAnswer(0) });
+        $('.button1').on('click',  ()=>{ evaluateAnswer(1) });
+        $('.button2').on('click',  ()=>{ evaluateAnswer(2) });
+        $('.button3').on('click',  ()=>{ evaluateAnswer(3) });
+    }else{
+        finalScore();
+    }
 
     
     console.log(`questionLoop() ran`);
 }
 
 function evaluateAnswer( int ){
+    console.log("Evaluate has been called");
     $('.body').empty();
     $('.splash').toggleClass('hidden');
     if (int === STORE[questionCounter].correctAnswerIndex){
@@ -140,7 +145,6 @@ function evaluateAnswer( int ){
     }
 
     questionCounter++;
-    console.log("Question Counter is set to:" + questionCounter);
 
     $('.correct').on('click','.continue',()=>{  
         $('.correct').toggleClass('hidden');
@@ -165,6 +169,8 @@ function finalScore() {
      * user will be presented with their score and prompted to start a new quiz
      * 
      */
+
+     
 
     console.log(`finalScore() ran`);
 }
