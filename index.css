@@ -1,12 +1,8 @@
 
 
 body {
-    background-color: rgb(82, 82, 82);
-    color:white;
-}
-
-.body{
-    height:150px;
+    background-color: rgb(57, 55, 55);
+    color:rgb(245, 255, 241);
 }
 
 .correct,.incorrect {
@@ -20,19 +16,29 @@ body {
 }
 
 .correct,.incorrect{
-    width:400px;
+    width:320px;
     background-color:black;
     padding:10px;
+    border-radius:2%;
 }
 
 img{
-    width:400px;
+    width:320px;
+    
 }
 
 
-@media only screen and (min-width: 800px){
+@media only screen and (min-width: 400px){
     .wrapper{
-        width:80%;
+        width:400px;
         margin:auto;
+    }
+
+    .correct,.incorrect{
+        width:400px;
+    }
+
+    img {
+        width:400px;
     }
 }

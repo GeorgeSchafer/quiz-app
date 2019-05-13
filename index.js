@@ -110,13 +110,13 @@ function questionLoop() {
      */
 
     $(`.head`).empty();
-    $('.body').html(`<form class='answerBucket'></form>`);
+    $('.body').html(`<form><legend></legend><section class='answerBucket'></section></form>`);
     updateFooter();
     $('.answerBucket').empty();
 
 
     if (questionCounter < STORE.length){
-        $('.head').html(`<h2>${STORE[questionCounter].question}</h2>`);
+        $('legend').html(`<h2>${STORE[questionCounter].question}</h2>`);
         for(let j = 0 ; j < STORE[questionCounter].answers.length ; j++){
             $(`.answerBucket`).append(`<p><button type='button' class='button${j}'>${STORE[questionCounter].answers[j]}</button></p>`); 
         }
