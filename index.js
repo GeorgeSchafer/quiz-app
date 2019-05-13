@@ -82,7 +82,7 @@ function welcomePage() {
 
 
     $('.head').html(`<h1>Xenomorph Safety Quiz</h1>`);
-    $('.body').append(`<p>After this training quiz you will be rated a class-C hazardous biological handler by Weyland-Yutani, heretofore known as ‘the Company’. By undertaking this quiz you waive the right to take legal action against the Company for any physical or mental harm resulting from the shipping and handling of alien eggs. Failure to comply will result in a detailed paperwork debriefing of family-members. </p>`);
+    $('.body').append(`<p>After this training quiz you will be rated a class-C hazardous biological handler by Weyland-Yutani, heretofore known as 'the Company'. By undertaking this quiz you waive the right to take legal action against the Company for any physical or mental harm resulting from the shipping and handling of alien eggs. Failure to comply will result in a detailed paperwork debriefing of family-members. </p>`);
     $('.foot').append(`<button class='start' type='button'>Click here to start</button>`);
     $('.correct').append(`<img src='./images/nodding.gif' alt='Xenomorph appears to be nodding' /><button type='button' class='continue'>Continue</button>`);
     $('.incorrect').append(`<img src='./images/facehugging.gif' alt='Face hugger infecting in first person.' /><button type='button' class='continue'>Continue</button>`);
@@ -110,12 +110,12 @@ function questionLoop() {
      */
 
     $(`.head`).empty();
-    $(`.foot`).empty();
     $('.body').html(`<form class='answerBucket'></form>`);
+    updateFooter();
     $('.answerBucket').empty();
 
 
-    if (questionCounter <= STORE.length){
+    if (questionCounter < STORE.length){
         $('.head').html(`<h2>${STORE[questionCounter].question}</h2>`);
         for(let j = 0 ; j < STORE[questionCounter].answers.length ; j++){
             $(`.answerBucket`).append(`<p><button type='button' class='button${j}'>${STORE[questionCounter].answers[j]}</button></p>`); 
@@ -135,6 +135,8 @@ function questionLoop() {
 
 function evaluateAnswer( int ){
     console.log("Evaluate has been called");
+    
+    
     $('.body').empty();
     $('.splash').toggleClass('hidden');
     if (int === STORE[questionCounter].correctAnswerIndex){
@@ -143,22 +145,17 @@ function evaluateAnswer( int ){
     } else {
         $('.incorrect').toggleClass('hidden');
     }
-
+    updateFooter();
     questionCounter++;
-
-    $('.correct').on('click','.continue',()=>{  
-        $('.correct').toggleClass('hidden');
-        questionLoop(); })
-
-    $('.incorrect').on('click','.continue',()=>{  
-        $('.incorrect').toggleClass('hidden');
-        questionLoop(); })
-
-        
 
 }
 
-function incorrect(){
+function updateFooter(){
+    if(questionCounter < STORE.length){
+        $(`.foot`).html(`<p>Score: ${score}</p><p>Progress: ${questionCounter+1} of 6`);
+    } else {
+        $(`.foot`).html(`<p>Score: ${score}</p><p>Progress: ${questionCounter} of 6`);
+    }
 }
 
 function finalScore() {
@@ -170,7 +167,11 @@ function finalScore() {
      * 
      */
 
-     
+    questionCounter=0;
+    score=0;
+
+    $('.body').append(`<button types='button' class='newGame'>Click here to test again</button>`);
+    $('.newGame').on('click',()=>{ questionLoop(); })
 
     console.log(`finalScore() ran`);
 }
@@ -189,3 +190,11 @@ function init() {
 }
 
 $(init);
+
+$('.correct').on('click','.continue',()=>{  
+    $('.correct').toggleClass('hidden');
+    questionLoop(); })
+
+$('.incorrect').on('click','.continue',()=>{  
+    $('.incorrect').toggleClass('hidden');
+    questionLoop(); })
