@@ -118,7 +118,7 @@ function questionLoop() {
     if (questionCounter < STORE.length){
         $('legend').html(`<h2>${STORE[questionCounter].question}</h2>`);
         for(let j = 0 ; j < STORE[questionCounter].answers.length ; j++){
-            $(`.answerBucket`).append(`<p><button type='button' class='button${j}'>${STORE[questionCounter].answers[j]}</button></p>`); 
+            $(`.answerBucket`).append(`<p><label>${STORE[questionCounter].answers[j]}</label><br /><button type='button' class='button${j}'>${STORE[questionCounter].answers[j]}</button></p>`); 
         }
         
         $('.button0').on('click',  ()=>{ evaluateAnswer(0) });
@@ -175,15 +175,6 @@ function finalScore() {
 
     console.log(`finalScore() ran`);
 }
-
-
-
-
-
-
-
-
-
 
 function init() {
     welcomePage();
